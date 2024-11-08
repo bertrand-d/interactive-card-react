@@ -1,0 +1,11 @@
+@use "../utils/variables";
+
+.big-font {
+    font-size: 24px;
+    letter-spacing: 3px;
+}
+
+.grey-font {
+    color: variables.$dark-grey;
+    font-size: 15px;
+}

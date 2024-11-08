@@ -1,0 +1,47 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+}
+
+p {
+    margin: 0;
+}
+
+input {
+    width: 100%;
+}
+
+fieldset {
+    padding: 0;
+    border: none;
+    margin: 0;
+}
+
+legend {
+    margin-bottom: 10px;
+}
+
+label {
+    letter-spacing: 2px;
+}
+
+label[for="expiration-month"],
+label[for="expiration-year"]
+{
+    display:none;
+}
+
+input {
+    border: solid 1px hsl(270, 3%, 87%);
+    border-radius: 5px;
+    padding: 10px;
+}
+
+input::placeholder {
+    color: hsl(279, 6%, 55%);
+    font-size: bold;
+}

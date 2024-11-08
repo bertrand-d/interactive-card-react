@@ -1,0 +1,50 @@
+#form-card,
+#finish {
+    width: 50%;
+    margin: auto;
+    color: hsl(278, 68%, 11%);
+    display: flex;
+    flex-direction: column;
+    gap: 20px 0;
+}
+
+.form-lane {
+    display: flex;
+    gap: 10px 0;
+    flex-direction: column;
+    text-transform: uppercase;
+    flex-grow: 1;
+}
+
+.double-lane {
+    display: flex;
+    gap: 0 10px;
+}
+
+.small-lane {
+    width: 40%;
+}
+
+.form-block {
+    display: flex;
+    gap: 0 20px;
+}
+
+#finish {
+    display: none;
+    text-align: center;
+
+    &:before {
+        content: "";
+        background: url('../../images/icon-complete.svg') no-repeat;
+        height: 60px;
+        width: 60px;
+        display: inline-block;
+        background-size: 60px;
+        margin: 0 auto;
+    }
+
+    #continue {
+        margin-top: 20px;
+    }
+}

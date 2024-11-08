@@ -1,0 +1,25 @@
+@charset "UTF-8";
+
+//1. configuration et utilitaires
+@use 'utils/mixins';
+@use 'utils/variables';
+@use 'utils/animations';
+
+//2. Vendors
+
+//3. Base
+@use 'base/base';
+@use 'base/reusable-class';
+
+//4. Layout-related sections
+@use 'layouts/footer';
+
+//5. Components
+@use 'components/bank-card';
+@use 'components/button';
+@use 'components/form-card';
+
+//6. Page-specific styles
+@use 'pages/home';
+
+//7. Themes

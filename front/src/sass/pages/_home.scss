@@ -1,0 +1,38 @@
+@use "../utils/mixins";
+
+.main-card-page {
+    display: flex;
+    flex-direction: column;
+
+    @include mixins.breakpoint-up('sm') {
+        flex-direction: row;
+    }
+}
+
+.main-left {
+    position: relative;
+    background: url("../images/bg-main-mobile.png") no-repeat;
+    display: flex;
+    flex-direction: column;
+    background-size: 800px;
+    height: 300px;
+
+    @include mixins.breakpoint-up('sm') {
+        height: 100vh;
+        flex-direction: row;
+        width: 40%;
+        background: url("../images/bg-main-desktop.png") no-repeat;
+        background-size: 100%;
+    }
+}
+
+.main-right {
+    display: flex;
+    flex-direction: column;
+    margin: 100px auto auto auto;
+
+    @include mixins.breakpoint-up('sm') {
+        width: 60%;
+        margin: auto;
+    }
+}
