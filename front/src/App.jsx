@@ -26,11 +26,9 @@ function App() {
   const cardFront = useRef(null);
 
   const handleFocus = (event) => {
-    console.log(event.target)
     const { dataset } = event.target
 
-    console.log('avant if', cardBack.current.classList)
-
+    //if the focus is on an input connected to the back of the card, and the back card element only contain "back-card" class, than back card go to the front
     if (dataset.cardPosition === "back" && cardBack.current.classList.contains("back-card")) {
       cardBack.current.className = "back-card go-front"
       cardFront.current.className = "front-card go-back"
