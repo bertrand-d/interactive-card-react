@@ -1,10 +1,10 @@
-@use "../utils/mixins";
+@use "../utils/breakpoints";
 
 .main-card-page {
     display: flex;
     flex-direction: column;
 
-    @include mixins.breakpoint-up('sm') {
+    @include breakpoints.breakpoint-up('sm') {
         flex-direction: row;
     }
 }
@@ -17,7 +17,7 @@
     background-size: 800px;
     height: 300px;
 
-    @include mixins.breakpoint-up('sm') {
+    @include breakpoints.breakpoint-up('sm') {
         height: 100vh;
         flex-direction: row;
         width: 40%;
@@ -31,7 +31,7 @@
     flex-direction: column;
     margin: 100px auto auto auto;
 
-    @include mixins.breakpoint-up('sm') {
+    @include breakpoints.breakpoint-up('sm') {
         width: 60%;
         margin: auto;
     }

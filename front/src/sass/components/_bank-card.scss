@@ -1,4 +1,4 @@
-@use "../utils/mixins";
+@use "../utils/breakpoints";
 
 .bank-card-container {
     position: absolute;
@@ -28,7 +28,7 @@
         transform: translate(50%);
         z-index: 1;
 
-        @include mixins.breakpoint-up('sm') {
+        @include breakpoints.breakpoint-up('sm') {
             top: 30%;
             right: -20%;
             background-size: 350px;
@@ -74,7 +74,7 @@
         max-width: 350px;
         z-index: 0;
 
-        @include mixins.breakpoint-up('sm') {
+        @include breakpoints.breakpoint-up('sm') {
             background-size: 350px;
             height: 192px;
             width: 350px;
