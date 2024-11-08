@@ -2,14 +2,14 @@
 
 //1. configuration et utilitaires
 @use 'utils/breakpoints';
-@use 'utils/variables';
+@use 'utils/colors';
+@use 'utils/reusable-class';
 @use 'utils/animations';
 
 //2. Vendors
 
 //3. Base
 @use 'base/base';
-@use 'base/reusable-class';
 
 //4. Layout-related sections
 @use 'layouts/footer';

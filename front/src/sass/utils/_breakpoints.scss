@@ -30,16 +30,3 @@ $breakpoints: (
         }
     }
 }
-
-/* HOW TO USE :
-
-for desktop first
-@include breakpoint(lg) {
-     display: flex;
-} 
-
-for mobile first
-@include breakpoint(lg, up) {
-     display: flex;
-} 
-*/

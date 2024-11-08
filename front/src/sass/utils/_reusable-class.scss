@@ -1,4 +1,4 @@
-@use "../utils/variables";
+@use "../utils/colors";
 
 .big-font {
     font-size: 24px;
@@ -6,6 +6,6 @@
 }
 
 .grey-font {
-    color: variables.$dark-grey;
+    color: colors.$dark-grey;
     font-size: 15px;
 }
