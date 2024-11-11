@@ -1,7 +1,13 @@
 import { useState } from 'react';
-import CardFront from '../components/CardFront';
+import CardFront from '../components/cardFront';
 import CardBack from '../components/CardBack';
 import FormField from '../components/FormField'
+
+export const FLIP_NEUTRAL = 0
+export const FLIP_BACK = -1
+export const FLIP_FRONT = 1
+
+
 
 export default function CreditCardForm() {
   // Etat initial avec valeurs par défaut
@@ -14,7 +20,7 @@ export default function CreditCardForm() {
   };
 
   const [values, setValues] = useState(initialState);
-  const [isCardFlipped, setIsCardFlipped] = useState(false);
+  const [flipMode, setFlipMode] = useState(FLIP_NEUTRAL)
 
   // Gestionnaire de changement de valeur avec formatage
   const handleChange = (event) => {
@@ -42,7 +48,8 @@ export default function CreditCardForm() {
   // Gestion du flip de la carte
   const handleFocus = (event) => {
     const { dataset } = event.target;
-    setIsCardFlipped(dataset.cardPosition === "back");
+    const newFlipMode = dataset.cardPosition === "back" ? FLIP_BACK : FLIP_FRONT
+    setFlipMode(newFlipMode)
   };
 
   // Soumission du formulaire
@@ -58,13 +65,13 @@ export default function CreditCardForm() {
         <div className="bank-card-container">
           <div className="bank-card">
             <CardFront
-              isFlipped={isCardFlipped}
               cardNumber={values.number}
               name={values.name}
               expMonth={values.expMonth}
               expYear={values.expYear}
+              flipMode={flipMode}
             />
-            <CardBack secretCode={values.secretCode} isFLipped={isCardFlipped}/>
+            <CardBack secretCode={values.secretCode} flipMode={flipMode}/>
           </div>
         </div>
       </div>

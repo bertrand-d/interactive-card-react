@@ -1,6 +1,15 @@
-export default function CardBack({ secretCode, isFLipped }) {
+import { FLIP_BACK, FLIP_FRONT } from "../pages/creditCardForm"
+
+export default function CardBack({ secretCode, flipMode }) {
+    let animation = ''
+    if (flipMode == FLIP_BACK) {
+        animation = 'go-front'
+    } else if (flipMode == FLIP_FRONT) {
+        animation = 'go-back'
+    }
+
     return (
-        <div className={`back-card ${isFLipped ? 'go-front' : 'go-back'}`}>
+        <div className={`back-card ${animation}`}>
             <p id="secret-code">{secretCode || '•••'}</p>
         </div>
     )
