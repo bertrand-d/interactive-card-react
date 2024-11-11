@@ -7,8 +7,6 @@ export const FLIP_NEUTRAL = 0
 export const FLIP_BACK = -1
 export const FLIP_FRONT = 1
 
-
-
 export default function CreditCardForm() {
   // Etat initial avec valeurs par défaut
   const initialState = {
@@ -71,7 +69,7 @@ export default function CreditCardForm() {
               expYear={values.expYear}
               flipMode={flipMode}
             />
-            <CardBack secretCode={values.secretCode} flipMode={flipMode}/>
+            <CardBack secretCode={values.secretCode} flipMode={flipMode} />
           </div>
         </div>
       </div>
@@ -123,17 +121,18 @@ export default function CreditCardForm() {
                 />
               </div>
             </fieldset>
-
-            <FormField
-              label="CVC"
-              name="secretCode"
-              placeholder="e.g. 123"
-              maxLength="3"
-              cardPosition="back"
-              value={values.secretCode}
-              onChange={handleChange}
-              onFocus={handleFocus}
-            />
+            <fieldset className="form-lane small-lane">
+              <FormField
+                label="CVC"
+                name="secretCode"
+                placeholder="e.g. 123"
+                maxLength="3"
+                cardPosition="back"
+                value={values.secretCode}
+                onChange={handleChange}
+                onFocus={handleFocus}
+              />
+            </fieldset>
           </div>
 
           <button type="submit" className="button">
