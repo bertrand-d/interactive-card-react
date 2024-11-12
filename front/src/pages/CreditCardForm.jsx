@@ -36,7 +36,6 @@ export default function CreditCardForm() {
     };
 
     const formattedValue = formatters[name] ? formatters[name](value) : value;
-
     setValues(prev => ({
       ...prev,
       [name]: formattedValue
@@ -53,93 +52,91 @@ export default function CreditCardForm() {
   // Soumission du formulaire
   const handleSubmit = (event) => {
     event.preventDefault();
-    // Validation et traitement du formulaire
     console.log('Formulaire soumis:', values);
   };
 
   return (
-    <main className="main-card-page">
-      <div className="main-left">
-        <div className="bank-card-container">
-          <div className="bank-card">
-            <CardFront
-              cardNumber={values.number}
-              name={values.name}
-              expMonth={values.expMonth}
-              expYear={values.expYear}
-              flipMode={flipMode}
-            />
-            <CardBack secretCode={values.secretCode} flipMode={flipMode} />
+      <main className="main-card-page">
+        <div className="main-left">
+          <div className="bank-card-container">
+            <div className="bank-card">
+              <CardFront
+                cardNumber={values.number}
+                name={values.name}
+                expMonth={values.expMonth}
+                expYear={values.expYear}
+                flipMode={flipMode}
+              />
+              <CardBack secretCode={values.secretCode} flipMode={flipMode} />
+            </div>
           </div>
         </div>
-      </div>
 
-      <div className="main-right">
-        <form onSubmit={handleSubmit} id="form-card">
-          <FormField
-            label="Cardholder Name"
-            name="name"
-            placeholder="e.g. Jane Appleseed"
-            cardPosition="front"
-            value={values.name}
-            onChange={handleChange}
-            onFocus={handleFocus}
-          />
+        <div className="main-right">
+          <form onSubmit={handleSubmit} id="form-card">
+            <FormField
+              label="Cardholder Name"
+              name="name"
+              placeholder="e.g. Jane Appleseed"
+              cardPosition="front"
+              value={values.name}
+              onChange={handleChange}
+              onFocus={handleFocus}
+            />
 
-          <FormField
-            label="Card Number"
-            name="number"
-            placeholder="e.g. 1234 5678 9123 0000"
-            maxLength="16"
-            cardPosition="front"
-            value={values.number}
-            onChange={handleChange}
-            onFocus={handleFocus}
-          />
+            <FormField
+              label="Card Number"
+              name="number"
+              placeholder="e.g. 1234 5678 9123 0000"
+              maxLength="16"
+              cardPosition="front"
+              value={values.number}
+              onChange={handleChange}
+              onFocus={handleFocus}
+            />
 
-          <div className="form-block">
-            <fieldset className="form-lane small-lane">
-              <legend>Exp. Date (MM/YY)</legend>
-              <div className="double-lane">
+            <div className="form-block">
+              <fieldset className="form-lane small-lane">
+                <legend>Exp. Date (MM/YY)</legend>
+                <div className="double-lane">
+                  <FormField
+                    name="expMonth"
+                    placeholder="MM"
+                    maxLength="2"
+                    cardPosition="front"
+                    value={values.expMonth}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                  />
+                  <FormField
+                    name="expYear"
+                    placeholder="YY"
+                    maxLength="2"
+                    cardPosition="front"
+                    value={values.expYear}
+                    onChange={handleChange}
+                    onFocus={handleFocus}
+                  />
+                </div>
+              </fieldset>
+              <fieldset className="form-lane small-lane">
                 <FormField
-                  name="expMonth"
-                  placeholder="MM"
-                  maxLength="2"
-                  cardPosition="front"
-                  value={values.expMonth}
+                  label="CVC"
+                  name="secretCode"
+                  placeholder="e.g. 123"
+                  maxLength="3"
+                  cardPosition="back"
+                  value={values.secretCode}
                   onChange={handleChange}
                   onFocus={handleFocus}
                 />
-                <FormField
-                  name="expYear"
-                  placeholder="YY"
-                  maxLength="2"
-                  cardPosition="front"
-                  value={values.expYear}
-                  onChange={handleChange}
-                  onFocus={handleFocus}
-                />
-              </div>
-            </fieldset>
-            <fieldset className="form-lane small-lane">
-              <FormField
-                label="CVC"
-                name="secretCode"
-                placeholder="e.g. 123"
-                maxLength="3"
-                cardPosition="back"
-                value={values.secretCode}
-                onChange={handleChange}
-                onFocus={handleFocus}
-              />
-            </fieldset>
-          </div>
-
-          <button type="submit" className="button">
-            Confirm
-          </button>
-        </form>
-      </div>
-    </main>
+              </fieldset>
+            </div>
+            <button type="submit" className="button">
+              Confirm
+            </button>
+          </form>
+        </div>
+      </main>
   );
 };

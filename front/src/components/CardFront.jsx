@@ -8,6 +8,7 @@ export default function CardFront({ cardNumber, name, expMonth, expYear, flipMod
         animation = 'go-front'
     }
 
+    // Formatage du numéro de carte bancaire
     function cc_format(value) {
         let v = value.replace(/\s+/g, '').replace(/[^0-9]/gi, '')
         let matches = v.match(/\d{4,16}/g);
