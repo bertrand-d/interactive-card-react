@@ -47,23 +47,36 @@ export default function CreditCardForm() {
   // FLip card on focus
   const handleFocus = (event) => {
     const { dataset } = event.target;
-    const newFlipMode = dataset.cardPosition === "back" ? FLIP_BACK : FLIP_FRONT
+    let newFlipMode
+    if(dataset.cardPosition === "back"){
+      newFlipMode = FLIP_BACK
+    } else if(dataset.cardPosition === "front" && flipMode === FLIP_NEUTRAL){
+        newFlipMode = FLIP_NEUTRAL
+    } else {
+      newFlipMode = FLIP_FRONT
+    }
     setFlipMode(newFlipMode)
   };
 
   //schema validation form
-  const schema = yup
-    .object({
-      name: yup.string().required("Name is a required file"),
-      number: yup.string().min(16).max(16).required("Card number is a required file"),
-      expMonth: yup.number().transform((value) => Number.isNaN(value) ? null : value)
-        .min(2, "Expiration month must be equal to 2 numbers length").max(2, "Expiration month must be equal to 2 numbers length").positive("Expiration month must be a positive number").integer().required("Expiration month is a required file"),
-      expYear: yup.number().transform((value) => Number.isNaN(value) ? null : value)
-        .min(2, "Expiration year must be equal to 2 numbers length").max(2, "Expiration year must be equal to 2 numbers length").positive("Expiration year must be a positive number").integer().required("Expiration year is a required file"),
-      secretCode: yup.number().transform((value) => Number.isNaN(value) ? null : value)
-        .min(3, "Secret code must be equal to 3 numbers length").max(3, "Secret code must be equal to 3 numbers length").positive("Secret code must be a positive number").integer().required("Secret code is a required file"),
-    })
-    .required()
+  const schema = yup.object({
+    name: yup.string()
+      .required("Le nom est requis"),
+    number: yup.string()
+      .matches(/^\d{16}$/, "Le numéro de carte doit contenir 16 chiffres")
+      .required("Le numéro de carte est requis"),
+    expMonth: yup.string()
+      .matches(/^\d{1,2}$/, "Le mois doit contenir 1 ou 2 chiffres")
+      .test("valid-month", "Le mois doit être entre 1 et 12",
+        (value) => !value || (parseInt(value) >= 1 && parseInt(value) <= 12))
+      .required("Le mois d'expiration est requis"),
+    expYear: yup.string()
+      .matches(/^\d{2}$/, "L'année doit contenir 2 chiffres")
+      .required("L'année d'expiration est requise"),
+    secretCode: yup.string()
+      .matches(/^\d{3}$/, "Le code secret doit contenir 3 chiffres")
+      .required("Le code secret est requis"),
+  });
 
   //react hook form for validation
   const { register, handleSubmit, formState, formState: { errors } } = useForm({
@@ -71,13 +84,13 @@ export default function CreditCardForm() {
     resolver: yupResolver(schema),
   })
 
-  console.log(errors)
   const onSubmit = (data) => {
     console.log("data")
   }
 
+  console.log(errors)
   //form state submit
-  const { isSubmitting, isSubmitSuccessful } = formState
+  const { isSubmitSuccessful } = formState
 
   return (
     <main className="main-card-page">
@@ -97,7 +110,7 @@ export default function CreditCardForm() {
       </div>
 
       <div className="main-right">
-        <form onSubmit={handleSubmit(onSubmit)} id="form-card" name="form-card">
+        <form id="form-card" name="form-card">
           <FormField
             type="text"
             label="Cardholder Name"
@@ -124,7 +137,7 @@ export default function CreditCardForm() {
             value={values.number}
             onChange={handleChange}
             onFocus={handleFocus}
-            onRegister={register("number")}
+            register={register("number")}
           />
           {
             errors.number &&
@@ -144,7 +157,7 @@ export default function CreditCardForm() {
                   value={values.expMonth}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  onRegister={register("expMonth")}
+                  register={register("expMonth")}
                 />
 
                 <FormField
@@ -156,7 +169,7 @@ export default function CreditCardForm() {
                   value={values.expYear}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  onRegister={register("expYear")}
+                  register={register("expYear")}
                 />
               </div>
             </fieldset>
@@ -171,7 +184,7 @@ export default function CreditCardForm() {
                 value={values.secretCode}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                onRegister={register("secretCode")}
+                register={register("secretCode")}
               />
             </fieldset>
           </div>
@@ -192,6 +205,10 @@ export default function CreditCardForm() {
           </button>
         </form>
       </div>
+      {
+        isSubmitSuccessful &&
+        <div>popup</div>
+      }
     </main>
   );
 };
