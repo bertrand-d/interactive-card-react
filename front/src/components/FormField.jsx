@@ -1,10 +1,10 @@
 // Composant pour le champ de formulaire
-export default function FormField({ label, name, placeholder, maxLength, cardPosition, value, onChange, onFocus }) {
+export default function FormField({type, label, name, placeholder, maxLength, cardPosition, value, onChange, onFocus, onRegister }) {
     return (
         <div className="form-lane">
             <label htmlFor={name}>{label}</label>
             <input
-                type="text"
+                type={type}
                 id={name}
                 name={name}
                 placeholder={placeholder}
@@ -13,6 +13,7 @@ export default function FormField({ label, name, placeholder, maxLength, cardPos
                 value={value}
                 onChange={onChange}
                 onFocus={onFocus}
+                register = {onRegister}
                 required
             />
         </div>
