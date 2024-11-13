@@ -1,12 +1,12 @@
 import React from 'react'
 
-export default function FormFieldBebou({type, label, placeholder, maxLength, cardPosition, onChange, onFocus, register}) {
+export default function FormFieldBebou({label, placeholder, maxLength, cardPosition, onChange, onFocus, register}) {
     const {name, value, onChange: onChangeForm, ref } = register
     return (
         <div className="form-lane">
             <label htmlFor={name}>{label}</label>
             <input
-                type={type}
+                type="text"
                 id={name}
                 placeholder={placeholder}
                 maxLength={maxLength}

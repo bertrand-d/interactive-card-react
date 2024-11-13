@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import CardFront from '../components/cardFront';
 import CardBack from '../components/CardBack';
 import FormField from '../components/FormField';
@@ -47,10 +47,10 @@ export default function CreditCardForm() {
   const handleFocus = (event) => {
     const { dataset } = event.target;
     let newFlipMode
-    if(dataset.cardPosition === "back"){
+    if (dataset.cardPosition === "back") {
       newFlipMode = FLIP_BACK
-    } else if(dataset.cardPosition === "front" && flipMode === FLIP_NEUTRAL){
-        newFlipMode = FLIP_NEUTRAL
+    } else if (dataset.cardPosition === "front" && flipMode === FLIP_NEUTRAL) {
+      newFlipMode = FLIP_NEUTRAL
     } else {
       newFlipMode = FLIP_FRONT
     }
@@ -60,35 +60,44 @@ export default function CreditCardForm() {
   //schema validation form
   const schema = yup.object({
     name: yup.string()
-      .required("Le nom est requis"),
+      .required("Name is a required field"),
     number: yup.string()
-      .matches(/^\d{16}$/, "Le numéro de carte doit contenir 16 chiffres")
-      .required("Le numéro de carte est requis"),
+      .matches(/^\d{16}$/, "Card number must have 16 numbers")
+      .required("Card number is a required field"),
     expMonth: yup.string()
-      .matches(/^\d{1,2}$/, "Le mois doit contenir 1 ou 2 chiffres")
-      .test("valid-month", "Le mois doit être entre 1 et 12",
+      .matches(/^\d{1,2}$/, "Month number must have 1 or 2 digits")
+      .test("valid-month", "Month number must be between 1 and 12 digits",
         (value) => !value || (parseInt(value) >= 1 && parseInt(value) <= 12))
-      .required("Le mois d'expiration est requis"),
+      .required("Month number is a required field"),
     expYear: yup.string()
-      .matches(/^\d{2}$/, "L'année doit contenir 2 chiffres")
-      .required("L'année d'expiration est requise"),
+      .matches(/^\d{2}$/, "Year expiration number must have 2 digits")
+      .required("Year expiration number is a required field"),
     secretCode: yup.string()
-      .matches(/^\d{3}$/, "Le code secret doit contenir 3 chiffres")
-      .required("Le code secret est requis"),
+      .matches(/^\d{3}$/, "Secret code number must have 3 digits")
+      .required("Secret code number is a required field"),
   });
 
   //react hook form for validation
-  const { register, handleSubmit, formState, formState: { errors } } = useForm({
+  const { register, reset, handleSubmit, formState, formState: { errors } } = useForm({
     mode: "onTouched",
     resolver: yupResolver(schema)
   })
 
   const onSubmit = (data) => {
-    console.log("data")
+    console.log("data", data)
   }
 
   //form state submit
-  const { isSubmitSuccessful } = formState
+  const [displaySuccessPopup, setDisplaySuccessPopup ] = useState(false)
+  useEffect(() => {
+    if(formState.isSubmitSuccessful){
+      setDisplaySuccessPopup(true)
+      reset({
+        data: initialState,
+      })
+    }
+  }, [formState])
+  
 
   return (
     <main className="main-card-page">
@@ -110,13 +119,12 @@ export default function CreditCardForm() {
       <div className="main-right">
         <form className="form-card" name="form-card">
           <FormField
-            type="text"
             label="Cardholder Name"
             cardPosition="front"
             placeholder="e.g. Jane Appleseed"
             onChange={handleChange}
             onFocus={handleFocus}
-            register={{...register("name")}}
+            register={{ ...register("name") }}
           />
           {
             errors.name &&
@@ -124,14 +132,14 @@ export default function CreditCardForm() {
           }
 
           <FormField
-            type="number"
             label="Card Number"
             name="number"
+            maxLength="16"
             placeholder="e.g. 1234 5678 9123 0000"
             cardPosition="front"
             onChange={handleChange}
             onFocus={handleFocus}
-            register={{...register("number")}}
+            register={{ ...register("number") }}
           />
           {
             errors.number &&
@@ -143,7 +151,6 @@ export default function CreditCardForm() {
               <legend>Exp. Date (MM/YY)</legend>
               <div className="double-lane">
                 <FormField
-                  type="number"
                   name="expMonth"
                   placeholder="MM"
                   maxLength="2"
@@ -151,11 +158,10 @@ export default function CreditCardForm() {
                   value={values.expMonth}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  register={{...register("expMonth")}}
+                  register={{ ...register("expMonth") }}
                 />
 
                 <FormField
-                  type="number"
                   name="expYear"
                   placeholder="YY"
                   maxLength="2"
@@ -163,13 +169,12 @@ export default function CreditCardForm() {
                   value={values.expYear}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  register={{...register("expYear")}}
+                  register={{ ...register("expYear") }}
                 />
               </div>
             </fieldset>
             <fieldset className="form-lane small-lane">
               <FormField
-                type="number"
                 label="CVC"
                 name="secretCode"
                 placeholder="e.g. 123"
@@ -178,7 +183,7 @@ export default function CreditCardForm() {
                 value={values.secretCode}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                register={{...register("secretCode")}}
+                register={{ ...register("secretCode") }}
               />
             </fieldset>
           </div>
@@ -200,8 +205,14 @@ export default function CreditCardForm() {
         </form>
       </div>
       {
-        isSubmitSuccessful &&
-        <div>popup</div>
+        displaySuccessPopup &&
+        <div className="finish">
+          <p className="big-font">THANK YOU !</p>
+          <p className="grey-font">We've added your card details</p>
+          <div className="button" onClick={()=>(setDisplaySuccessPopup(false))}>
+            Continue
+          </div>
+        </div>
       }
     </main>
   );

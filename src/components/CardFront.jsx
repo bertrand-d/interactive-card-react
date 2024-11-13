@@ -1,4 +1,4 @@
-import { FLIP_BACK, FLIP_FRONT } from "../pages/creditCardForm"
+import { FLIP_BACK, FLIP_FRONT } from "../pages/CreditCardForm"
 
 export default function CardFront({ cardNumber, name, expMonth, expYear, flipMode}) {
     let animation = ''
@@ -30,7 +30,7 @@ export default function CardFront({ cardNumber, name, expMonth, expYear, flipMod
         <div className={`front-card ${animation}`} >
             <p className="card-number">{cc_format(cardNumber) || cc_format("0000000000000000")}</p>
             <div className="front-card-bottom">
-                <p className="card-name">{name || 'VOTRE NOM'}</p>
+                <p className="card-name">{name || 'YOUR NAME'}</p>
                 <p>
                     <span className="expiration-month">{expMonth || 'MM'}</span>
                     /
