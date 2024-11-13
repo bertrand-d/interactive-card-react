@@ -1,21 +1,26 @@
-// Composant pour le champ de formulaire
-export default function FormField({type, label, name, placeholder, maxLength, cardPosition, value, onChange, onFocus, onRegister }) {
+import React from 'react'
+
+export default function FormFieldBebou({type, label, placeholder, maxLength, cardPosition, onChange, onFocus, register}) {
+    const {name, value, onChange: onChangeForm, ref } = register
     return (
         <div className="form-lane">
             <label htmlFor={name}>{label}</label>
             <input
                 type={type}
                 id={name}
-                name={name}
                 placeholder={placeholder}
                 maxLength={maxLength}
                 data-card-position={cardPosition}
-                value={value}
-                onChange={onChange}
-                onFocus={onFocus}
-                register = {onRegister}
                 required
+                name={name}
+                value={value}
+                onChange={(e) => {
+                    onChangeForm(e)
+                    onChange(e)
+                }}
+                onFocus={onFocus}
+                ref = {ref}
             />
         </div>
     )
-};
+}

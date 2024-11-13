@@ -37,10 +37,9 @@ export default function CreditCardForm() {
       secretCode: (val) => val.replace(/\D/g, '')
     };
 
-    const formattedValue = formatters[name] ? formatters[name](value) : value;
     setValues(prev => ({
       ...prev,
-      [name]: formattedValue
+      [name]: value
     }));
   };
 
@@ -81,14 +80,13 @@ export default function CreditCardForm() {
   //react hook form for validation
   const { register, handleSubmit, formState, formState: { errors } } = useForm({
     mode: "onTouched",
-    resolver: yupResolver(schema),
+    resolver: yupResolver(schema)
   })
 
   const onSubmit = (data) => {
     console.log("data")
   }
 
-  console.log(errors)
   //form state submit
   const { isSubmitSuccessful } = formState
 
@@ -114,13 +112,11 @@ export default function CreditCardForm() {
           <FormField
             type="text"
             label="Cardholder Name"
-            name="name"
-            placeholder="e.g. Jane Appleseed"
             cardPosition="front"
-            value={values.name}
+            placeholder="e.g. Jane Appleseed"
             onChange={handleChange}
             onFocus={handleFocus}
-            register={register("name")}
+            register={{...register("name")}}
           />
           {
             errors.name &&
@@ -132,12 +128,10 @@ export default function CreditCardForm() {
             label="Card Number"
             name="number"
             placeholder="e.g. 1234 5678 9123 0000"
-            maxLength="16"
             cardPosition="front"
-            value={values.number}
             onChange={handleChange}
             onFocus={handleFocus}
-            register={register("number")}
+            register={{...register("number")}}
           />
           {
             errors.number &&
@@ -157,7 +151,7 @@ export default function CreditCardForm() {
                   value={values.expMonth}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  register={register("expMonth")}
+                  register={{...register("expMonth")}}
                 />
 
                 <FormField
@@ -169,7 +163,7 @@ export default function CreditCardForm() {
                   value={values.expYear}
                   onChange={handleChange}
                   onFocus={handleFocus}
-                  register={register("expYear")}
+                  register={{...register("expYear")}}
                 />
               </div>
             </fieldset>
@@ -184,7 +178,7 @@ export default function CreditCardForm() {
                 value={values.secretCode}
                 onChange={handleChange}
                 onFocus={handleFocus}
-                register={register("secretCode")}
+                register={{...register("secretCode")}}
               />
             </fieldset>
           </div>

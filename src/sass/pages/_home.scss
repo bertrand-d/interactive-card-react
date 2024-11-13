@@ -11,7 +11,7 @@
 
 .main-left {
     position: relative;
-    background: url("../images/bg-main-mobile.png") no-repeat;
+    background: url("/images/bg-main-mobile.png") no-repeat;
     display: flex;
     flex-direction: column;
     background-size: 800px;
@@ -21,7 +21,7 @@
         height: 100vh;
         flex-direction: row;
         width: 40%;
-        background: url("../images/bg-main-desktop.png") no-repeat;
+        background: url("/images/bg-main-desktop.png") no-repeat;
         background-size: 100%;
     }
 }
