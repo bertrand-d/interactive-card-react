@@ -1,10 +1,14 @@
 @use "../utils/breakpoints";
 
 .bank-card-container {
-    position: absolute;
-    top: 50%;
-    right: -20px;
-    transform: translateY(-50%);
+    margin: auto;
+
+    @include breakpoints.breakpoint-up('sm') {
+        position: absolute;
+        top: 50%;
+        right: -20px;
+        transform: translateY(-50%);
+    }
 
     .bank-card {
         position: relative;
@@ -47,7 +51,7 @@
         }
     }
 
-     .card-number {
+    .card-number {
         letter-spacing: 2px;
         font-size: 24px;
         margin-top: auto;
@@ -83,7 +87,7 @@
         }
     }
 
-     .secret-code {
+    .secret-code {
         color: #fff;
         margin: 65px 0 0 250px;
         letter-spacing: 2px;
