@@ -10,7 +10,7 @@ export default function CardBack({ secretCode, flipMode }) {
 
     return (
         <div className={`back-card ${animation}`}>
-            <p id="secret-code">{secretCode || '•••'}</p>
+            <p className="secret-code">{secretCode || '•••'}</p>
         </div>
     )
 };

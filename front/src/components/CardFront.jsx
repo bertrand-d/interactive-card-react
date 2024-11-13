@@ -28,13 +28,13 @@ export default function CardFront({ cardNumber, name, expMonth, expYear, flipMod
 
     return (
         <div className={`front-card ${animation}`} >
-            <p id="card-number">{cc_format(cardNumber) || cc_format("0000000000000000")}</p>
+            <p className="card-number">{cc_format(cardNumber) || cc_format("0000000000000000")}</p>
             <div className="front-card-bottom">
-                <p id="card-name">{name || 'VOTRE NOM'}</p>
+                <p className="card-name">{name || 'VOTRE NOM'}</p>
                 <p>
-                    <span id="expiration-month">{expMonth || 'MM'}</span>
+                    <span className="expiration-month">{expMonth || 'MM'}</span>
                     /
-                    <span id="expiration-year">{expYear || 'YY'}</span>
+                    <span className="expiration-year">{expYear || 'YY'}</span>
                 </p>
             </div>
         </div>

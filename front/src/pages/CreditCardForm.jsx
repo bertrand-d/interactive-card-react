@@ -110,7 +110,7 @@ export default function CreditCardForm() {
       </div>
 
       <div className="main-right">
-        <form id="form-card" name="form-card">
+        <form className="form-card" name="form-card">
           <FormField
             type="text"
             label="Cardholder Name"
