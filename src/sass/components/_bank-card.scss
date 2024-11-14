@@ -2,6 +2,7 @@
 
 .bank-card-container {
     margin: auto;
+    width: 100%;
 
     @include breakpoints.breakpoint-up('sm') {
         position: absolute;
@@ -12,14 +13,16 @@
 
     .bank-card {
         position: relative;
+        width: 100%;
+        min-width: 320px;
         height: 400px;
-        width: 400px;
 
         @include breakpoints.breakpoint-up('sm') {
             position: absolute;
             top: 50%;
             right: -20px;
             transform: translateY(-50%);
+            width: 400px;
         }
     }
 
@@ -60,9 +63,14 @@
 
     .card-number {
         letter-spacing: 2px;
-        font-size: 24px;
-        margin-top: auto;
+        font-size: 20px;
+        margin-top: 18%;
         margin-bottom: 20px;
+        
+        @include breakpoints.breakpoint-up('sm') {
+            margin-top: auto;
+            font-size: 24px;
+        }
     }
 
     .front-card-bottom {
@@ -96,7 +104,7 @@
 
     .secret-code {
         color: #fff;
-        margin: 65px 0 0 250px;
+        margin: 21% 0 0 84%;
         letter-spacing: 2px;
     }
 }
